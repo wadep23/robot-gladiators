@@ -3,7 +3,7 @@
 //  *Fight all enemy-robots
 //  *Defeat each enemy-robot
 // "Lose" - Player robot's health is zero or less
-window.alert('Welcome to Robot Wars!');
+
 var playerName = window.prompt("What is your robots name?");
 console.log(
     "Player robot's name is " + playerName + " !");
@@ -21,7 +21,7 @@ var fight = function(enemyName){
     while(playerHealth > 0 && enemyHealth > 0){
         var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
 
-        if (promptFight === "skip" || promptFight === "SKIP" || promptFight === "Skip"){
+        if (promptFight === "skip" || promptFight === "SKIP" || promptFight === "Skip" || promptFight === 's'){
             var confirmSkip = window.confirm("Are you sure you'd like to quit?");
             if (confirmSkip){
                 window.alert(playerName + " has chosen to skip the fight. Goodbye!");
@@ -32,47 +32,45 @@ var fight = function(enemyName){
             else {
                 fight();
             }
-        
+        }
         // if player chooses to fight
         
         // Subtract the value of 'playerAttack from the velue of 'enemyHealth' and use that result to update the value of 'enemyHealth
         enemyHealth = enemyHealth - playerAttack;
-        // Log a resulting message to the console so we know that it worked.
-        console.log(
-            playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining."
-        );
+        console.log(playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining.");
     
         if (enemyHealth <=0){
             window.alert(enemyName + " has died!");
             playerMoney = playerMoney + 20;
             break;
-        }
-        else {
+        }else {
             window.alert(enemyName + " still has " + enemyHealth + " health left.");
         }
         // subtract the value of 'enemyAttack' from the value of 'playerHealth' and use that result to update the value of 'playerHealth'
         playerHealth = playerHealth - enemyAttack;
-        // log a resulting message to the console so we know it worked.
-        console.log(
-            enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
-        );
+
+        console.log(enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining.");
+
         if (playerHealth <= 0){
             window.alert(playerName + " has died!");
             break;
-        }
-        else{
+        }else{
             window.alert(playerName + " still has " + playerHealth + " health left.");
         }
-        // if player chooses to skip
-    };
+    }
 }
     
 
 
-}
+
 for(var i = 0; i < enemyNames.length; i++){
-    var pickedEnemyName = enemyNames[i];
-    enemyHealth = 50;
-    fight(pickedEnemyName);
-    debugger;
+    if (playerHealth > 0){
+        window.alert('Welcome to Robot Gladiators! Round ' + (i + 1));
+        var pickedEnemyName = enemyNames[i];
+        enemyHealth = 50;
+        fight(pickedEnemyName);
+    }else{
+        window.alert('You have lost your robot in battle! Game Over!');
+        break;
+    }
 }
